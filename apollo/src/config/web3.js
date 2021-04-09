@@ -1,16 +1,16 @@
-import { web3 } from 'VOTRE PATH';
+import { web3 } from 'YOUR PATH TO Web3.js';
 // import contractArtifacts from './Register.json';
 import fs from "fs";
-let contractArtifacts = JSON.parse(fs.readFileSync('CHEMIN VERS VOTRE ABI', 'utf-8'))
+let contractArtifacts = JSON.parse(fs.readFileSync('YOUR PATH TO YOUR ABI', 'utf-8'))
 // console.log(contractArtifacts);
 export const chainId = async () => {
     return await web3.eth.net.getId()
 }
 
 const contractAddress = contractArtifacts["networks"]["CHAIN ID"]["address"];
-// console.log(contractArtifacts["networks"]["545021441"]["address"])
+
 export const Register = new web3.eth.Contract(contractArtifacts["abi"], contractAddress);
-// console.log(contractArtifacts["abi"])
+
 let lastBlock = await web3.eth.getBlockNumber()
 console.log(lastBlock);
 export const asciiToHex = (_ascii) => {
@@ -23,39 +23,6 @@ export const hexToAscii = (_hex) => {
 
 export const computeHash = (_string) => {
     return web3.utils.sha3(_string)
-}
-
-export const initWaitNewBlock = async () => {
-    try {
-        let lastBlock = await web3.eth.getBlockNumber()
-        return await waitNewBlock(lastBlock)
-
-    } catch (e) {
-        console.log(e);
-    }
-}
-
-const sleep = (ms) => {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-    });
-}
-
-
-export const waitNewBlock = async (lastBlock) => {
-    try {
-        await sleep(1000);
-        let newBlock = await web3.eth.getBlockNumber()
-        console.log("Compare last block " + lastBlock + " with the new block " + newBlock + " and wait ... ");
-
-        if (newBlock > lastBlock) {
-            console.log("New block found " + newBlock + " and last block is " + lastBlock);
-            return true
-        }
-        else await waitNewBlock(lastBlock)
-    } catch (e) {
-        console.log(e);
-    }
 }
 
 export const sendSignTransaction = async (

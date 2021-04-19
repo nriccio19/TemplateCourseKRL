@@ -1,10 +1,5 @@
 import Web3 from "web3"
 
-// https://github.com/ethereum/web3.js/tree/1.x/packages/web3-providers-http#usage
-const httpOptions = {
-    keepAlive: true,
-}
-
 //https://github.com/ethereum/web3.js/tree/1.x/packages/web3-providers-ws#usage
 const wsOptions = {
     clientConfig: {

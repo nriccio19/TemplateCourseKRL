@@ -18,9 +18,7 @@ const wsOptions = {
         onTimeout: true
     }
 }
-console.log(process.env.URL_BC);
 
-//export const web3 = new Web3(new Web3.providers.HttpProvider(process.env.URL_BC), httpOptions);
 const web3SocketParams = new Web3.providers.WebsocketProvider("INSERER VOTRE BASIC AUTH + WSS ENDPOINT", wsOptions)
 web3SocketParams.on('end', e => console.error('WS End', e));
 
